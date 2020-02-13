@@ -38,62 +38,51 @@ class App extends Component {
 
   addTodo = e => {
     e.preventDefault();
-  
-  const newTodo = {
-    task: this.state.todo,
-    id: Date.now(),
-    completed: false
+    const newTodo = { task: this.state.todo, completed: false, id: Date.now() };
+    this.setState({ 
+      todos: [...this.state.todos, newTodo], 
+      todo: '' 
+    });
   };
 
-  this.setState({
-    todos: [...this.state.todos, newTodo],
-    todo: ""
-  }); 
-};
+  changeTodo = e => this.setState({ [e.target.name]: e.target.value });
 
-changeTodo = e => this.setState({ [e.target.name]: e.target.value });
+  toggleTodo = id => {
+    let todos = this.state.todos.slice();
+    todos = todos.map(todo => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed;
+        return todo;
+      } else {
+        return todo;
+      }
+    });
+    this.setState({ todos });
+  };
 
-toggleTodo = id => {
-  let todos = this.state.todos.slice();
-  todos = todos.map(todo => {
-    if (todo.id === id) {
-      todo.completed = !todo.completed;
-      return todo;
-    } else {
-      return todo;
-    }
-  });
-  this.setState({ todos });
-};
-
-clearFinished = e => {
-  e.preventDefault();
-  let todos = this.state.todos.filter(todo => !todo.finished);
-  this.setState({ todos });
-};
+  clearFinished = e => {
+    e.preventDefault();
+    let todos = this.state.todos.filter(todo => !todo.completed);
+    this.setState({ todos });
+  };
 
   render() {
     return (
-      <div className="App">
-        <h1>Let's get stuff done!</h1>
-        <TodoForm 
+      <div>
+        <TodoForm
           value={this.state.todo}
           handleChange={this.changeTodo}
           handleAddTodo={this.addTodo}
-          handleClearFinished={this.clearFinished}
+          handleClearTodos={this.clearFinished}
         />
-        <TodoList 
+        <TodoList
           handleToggleComplete={this.toggleTodo}
           todos={this.state.todos}
         />
+        
       </div>
     );
   }
 }
-
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, 
-  // and any change handlers you need to work with your state.
 
 export default App;
