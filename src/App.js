@@ -9,37 +9,36 @@ class App extends Component {
       todos: [
         {
           task: "Do the dishes",
-          id: Date.now(),
+          id: 12345,
           completed: false
         },  
         {
           task: "Walk the dog",
-          id: Date.now(),
+          id: 123456,
           completed: false
         },
         {
           task: "Do the laundry",
-          id: Date.now(),
+          id: 1234567,
           completed: false
         },
         {
           task: "Go on a run",
-          id: Date.now(),
+          id: 12345678,
           completed: false
         },
         {
           task: "Get groceries",
-          id: Date.now(),
+          id: 123456789,
           completed: false
         }
       ], todo: ""
     };
   }
 
-  addTodo = (e, todo) => {
+  addTodo = e => {
     e.preventDefault();
   
-
   const newTodo = {
     task: this.state.todo,
     id: Date.now(),
@@ -55,45 +54,38 @@ class App extends Component {
 changeTodo = e => this.setState({ [e.target.name]: e.target.value });
 
 toggleTodo = id => {
-  console.log(todoID);
-
-  this.setState({
-    todos: this.state.todos.map(todo => {
-      console.log(todo);
-      if(id === todo.id) {
-        return {
-          ...todo,
-          finished: !todo.finished
-        };
-      }
-
+  let todos = this.state.todos.slice();
+  todos = todos.map(todo => {
+    if (todo.id === id) {
+      todo.completed = !todo.completed;
       return todo;
-    })
+    } else {
+      return todo;
+    }
   });
+  this.setState({ todos });
 };
 
 clearFinished = e => {
   e.preventDefault();
-  console.log(this.state.todos);
-  this.setState({
-    todos: this.state.todos.filter(todos => todos.finished === false)
-  });
-  console.log(this.state.todos);
+  let todos = this.state.todos.filter(todo => !todo.finished);
+  this.setState({ todos });
 };
 
   render() {
-    console.log("rendering...");
     return (
       <div className="App">
-        <div className="header">
-          <h1>Let's get stuff done!</h1>
-          <TodoForm addItem={this.addItem}/>
-        </div>
+        <h1>Let's get stuff done!</h1>
+        <TodoForm 
+          value={this.state.todo}
+          handleChange={this.changeTodo}
+          handleAddTodo={this.addTodo}
+          handleClearFinished={this.clearFinished}
+        />
         <TodoList 
-          todos={this.todos}
-          toggleTodo={this.toggleTodo}
-          clearFinished={this.clearFinished}
-        />  
+          handleToggleComplete={this.toggleTodo}
+          todos={this.state.todos}
+        />
       </div>
     );
   }
