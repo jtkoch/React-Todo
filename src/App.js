@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
+import "./components/TodoComponents/Todo.css";
 
 class App extends Component {
   constructor() {
@@ -68,7 +69,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <TodoForm
           value={this.state.todo}
           handleChange={this.changeTodo}
