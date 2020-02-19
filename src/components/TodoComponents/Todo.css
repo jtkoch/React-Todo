@@ -3,11 +3,8 @@
   flex-direction: column;
   align-items: center;
   align-content: center;
-  padding: 20px;
-  border: 3px solid black;
-  background-image: repeating-linear-gradient(rgb(116, 42, 42), rgb(124, 124, 124));
+  padding: 0px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  height: 90vh;
   font-size: 1.6rem;
 }
 
@@ -48,3 +45,12 @@ button:hover {
   color: black;
   background-color: lightgray;
 } 
+
+@media screen and (max-width: 600px) {
+  .App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+  }
+}

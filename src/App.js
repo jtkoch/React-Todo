@@ -7,33 +7,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      todos: [
-        {
-          task: "Do the dishes",
-          id: 12345,
-          completed: false
-        },  
-        {
-          task: "Walk the dog",
-          id: 123456,
-          completed: false
-        },
-        {
-          task: "Do the laundry",
-          id: 1234567,
-          completed: false
-        },
-        {
-          task: "Go on a run",
-          id: 12345678,
-          completed: false
-        },
-        {
-          task: "Get groceries",
-          id: 123456789,
-          completed: false
-        }
-      ], todo: ""
+      todos: [], todo: ""
     };
   }
 
