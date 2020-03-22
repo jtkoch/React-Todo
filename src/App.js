@@ -1,16 +1,66 @@
-import React from 'react';
+import React, { Component } from "react";
+import TodoForm from "./components/TodoComponents/TodoForm";
+import TodoList from "./components/TodoComponents/TodoList";
+import "./components/TodoComponents/Todo.css";
 
-class App extends React.Component {
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      todos: [], todo: ""
+    };
+  }
+
+  addTodo = e => {
+    e.preventDefault();
+    const newTodo = { task: this.state.todo, completed: false, id: Date.now() };
+    this.setState({ 
+      todos: [...this.state.todos, newTodo], 
+      todo: '' 
+    });
+  };
+
+  changeTodo = e => this.setState({ [e.target.name]: e.target.value });
+
+  toggleTodo = id => {
+    let todos = this.state.todos.slice();
+    todos = todos.map(todo => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed;
+        return todo;
+      } else {
+        return todo;
+      }
+    });
+    this.setState({ todos });
+  };
+
+  clearFinished = e => {
+    e.preventDefault();
+    let todos = this.state.todos.filter(todo => !todo.completed);
+    this.setState({ todos });
+  };
+
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
+      <div className="App">
+        <TodoForm
+          value={this.state.todo}
+          handleChange={this.changeTodo}
+          handleAddTodo={this.addTodo}
+          handleClearTodos={this.clearFinished}
+        />
+        <TodoList
+          handleToggleComplete={this.toggleTodo}
+          todos={this.state.todos}
+        />
+        
       </div>
     );
   }
 }
 
 export default App;
+
+
+// https://angry-babbage-4ce737.netlify.com/ <----- Link to deployed site.

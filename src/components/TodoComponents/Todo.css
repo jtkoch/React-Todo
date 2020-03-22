@@ -1,0 +1,56 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  padding: 0px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 1.6rem;
+}
+
+.header {
+  font-size: 3rem;
+  font-family: 'Faster One', cursive;
+  padding: 20px;
+
+}
+
+.todo-list {
+  padding: 20px;
+
+}
+
+form {
+  padding: 20px;
+}
+
+input {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: lightgray;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode';
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 2px solid;
+  color: lightgray;
+  background-color: black;
+}
+
+button:hover {
+  color: black;
+  background-color: lightgray;
+} 
+
+@media screen and (max-width: 600px) {
+  .App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+  }
+}
